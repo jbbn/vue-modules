@@ -1,0 +1,16 @@
+{
+  "name": "vue-modules",
+  "version": "0.0.0",
+  "description": "Some module implementation for VueJS",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jbbn/vue-modules.git"
+  },
+  "author": "João Bueno <joaobbn@gmail.com (https://github.com/jbbn)",
+  "license": "MIT",
+  "scripts": {
+    "start": "echo",
+    "dev": "echo"
+  }
+}
