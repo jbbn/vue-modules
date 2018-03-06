@@ -1,6 +1,6 @@
 {
   "name": "vue-modules",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Some module implementation for VueJS",
   "main": "index.js",
   "repository": {
@@ -9,8 +9,14 @@
   },
   "author": "João Bueno <joaobbn@gmail.com (https://github.com/jbbn)",
   "license": "MIT",
-  "scripts": {
-    "start": "echo",
-    "dev": "echo"
+  "devDependencies": {
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
+    "mocha": "^5.0.2"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
   }
 }
