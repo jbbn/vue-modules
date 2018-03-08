@@ -7,3 +7,6 @@ clean:
 unit:
 	clear
 	yarn mocha --require babel-register
+
+docs:
+	yarn documentation readme index.js --section=Docs

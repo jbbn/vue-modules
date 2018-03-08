@@ -13,14 +13,14 @@ const VueModules = {
    * @param {object} options Customizations of the plugin
    * @example Vue.use(VueModules, options)
    */
-  install (Vue, { router, store, modules = [], customPages = [] }) {
+  install (Vue, { router, store, modules = [] }) {
 
     /** @function
      * @name registerModule
      * @param {object} options Customizations for module
      * @example Vue.registerModule({ resource, module })
      */
-    Vue.registerModule = ({ resource, module = false, route = false }) => {
+    Vue.registerModule = ({ resource, module = false, route = false, custom = {} }) => {
       let routes = []
 
       // vuex registerModule
@@ -33,7 +33,7 @@ const VueModules = {
             resource,
             routes,
             alias: route.alias,
-            customPages
+            custom
           }
         ))
 
@@ -57,7 +57,7 @@ const routeHandler = (
     resource,
     routes = [],
     alias = false,
-    customPages
+    custom: { routes: customRoutes = [] }
   }
 ) => {
 
@@ -68,14 +68,14 @@ const routeHandler = (
    * instead of the defined in the module
    *
    * @example
-   * customPages = [
+   * customRoutes = [
    *   { name: 'user', component: require('./MyCustomUserPage') }
    * ]
    */
-  if (customPages.length > 0) {
-    if (_route.name === customPages[0].name) {
-      customPages[0].path = _route.path
-      _route = customPages[0]
+  if (customRoutes.length > 0) {
+    if (_route.name === customRoutes[0].name) {
+      customRoutes[0].path = _route.path
+      _route = customRoutes[0]
     }
   }
 
