@@ -13,7 +13,7 @@ const VueModules = {
    * @param {object} options Customizations of the plugin
    * @example Vue.use(VueModules, options)
    */
-  install (Vue, { app, router, store, modules = [] }) {
+  install (Vue, { app, router, store, modules = [], beforeRoutePush = () => {} }) {
 
     /** @function
      * @name registerModule
@@ -34,7 +34,8 @@ const VueModules = {
             resource,
             routes,
             alias: route.alias,
-            custom
+            custom,
+            beforeRoutePush
           }
         ))
 
@@ -59,7 +60,8 @@ const routeHandler = (
     resource,
     routes = [],
     alias = false,
-    custom: { routes: customRoutes = [] }
+    custom: { routes: customRoutes = [] },
+    beforeRoutePush
   }
 ) => {
 
@@ -108,8 +110,7 @@ const routeHandler = (
   const module = resource
   const page = _route.name
 
-  import(`../../src/core/apps-themes/${app}/modules/${module}/${page}.styl`)
-    .catch(() => import(`../../src/core/apps-themes/chalk/modules/${module}/${page}.styl`))
+  beforeRoutePush(app, module, page)
 
   routes.push(_route)
 }
