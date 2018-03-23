@@ -13,7 +13,7 @@ const VueModules = {
    * @param {object} options Customizations of the plugin
    * @example Vue.use(VueModules, options)
    */
-  install (Vue, { router, store, modules = [] }) {
+  install (Vue, { app, router, store, modules = [], beforeRoutePush = () => {} }) {
 
     /** @function
      * @name registerModule
@@ -30,10 +30,12 @@ const VueModules = {
         module.routes.forEach(_route => routeHandler(
           _route,
           {
+            app,
             resource,
             routes,
             alias: route.alias,
-            custom
+            custom,
+            beforeRoutePush
           }
         ))
 
@@ -54,10 +56,12 @@ const VueModules = {
 const routeHandler = (
   _route,
   {
+    app,
     resource,
     routes = [],
     alias = false,
-    custom: { routes: customRoutes = [] }
+    custom: { routes: customRoutes = [] },
+    beforeRoutePush
   }
 ) => {
 
@@ -102,6 +106,11 @@ const routeHandler = (
 
   // module "base" does not need prefix
   if (resource !== 'base') _route.path = `/${resource}${_route.path}`
+
+  const module = resource
+  const page = _route.name
+
+  beforeRoutePush(app, module, page)
 
   routes.push(_route)
 }
