@@ -2,7 +2,14 @@
   "name": "vue-modules",
   "version": "0.2.1",
   "description": "Some module implementation for VueJS",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "mkdir dist; babel index.js -o dist/index.js --source-maps",
+    "prepublishOnly": "yarn build"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/jbbn/vue-modules.git"
@@ -10,6 +17,7 @@
   "author": "João Bueno <joaobbn@gmail.com (https://github.com/jbbn)",
   "license": "MIT",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-register": "^6.26.0",
     "documentation": "^6.1.0",
@@ -17,7 +25,9 @@
   },
   "babel": {
     "presets": [
-      "env"
+      ["env", {
+        "forceAllTransforms": true
+      }]
     ]
   }
 }
