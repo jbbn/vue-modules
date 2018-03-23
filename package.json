@@ -7,6 +7,7 @@
     "dist"
   ],
   "scripts": {
+    "test": "mocha --require babel-core/register",
     "build": "mkdir dist; babel index.js -o dist/index.js --source-maps",
     "prepublishOnly": "yarn build"
   },
