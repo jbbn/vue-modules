@@ -10,3 +10,7 @@ unit:
 
 docs:
 	yarn documentation readme index.js --section=Docs
+
+next-version:
+	echo 'module.exports=' > view.js && npm view >> view.js
+	node next-version.js
